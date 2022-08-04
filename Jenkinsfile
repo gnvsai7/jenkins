@@ -13,7 +13,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login ghcr.io -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'sudo echo $DOCKERHUB_CREDENTIALS_PSW | docker login ghcr.io -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'sudo docker build -t ghcr.io/$DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest .'
             }
         }
