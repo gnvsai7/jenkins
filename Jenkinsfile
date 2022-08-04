@@ -7,7 +7,7 @@ pipeline {
     stages { 
         stage('SCM Checkout') {
             steps {
-                git 'https://github.com/gnvsai7/react-assignment-1.git'
+                git 'https://github.com/gnvsai7/jenkins.git'
             }
         }
 
