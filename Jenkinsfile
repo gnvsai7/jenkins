@@ -13,14 +13,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest .'
+                sh 'sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+                sh 'sudo docker build -t $DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest .'
             }
         }
 
         stage('Docker push') {
             steps {
-                sh 'docker push $DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest'
+                sh 'sudo docker push $DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest'
             }
         }
     }
