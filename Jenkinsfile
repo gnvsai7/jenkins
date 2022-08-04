@@ -25,7 +25,7 @@ pipeline {
         }
         stage ('Deploy Ec2') {
             steps {
-                sshagent(['ec2']) {
+                sshagent (credentials: ['ec2']) {
                 sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-220-174-254.us-east-2.compute.amazonaws.com ; sudo docker pull ghcr.io/$DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest; sudo docker run -d --name job -p 8083:8080 ghcr.io/$DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest"
             
                 } 
