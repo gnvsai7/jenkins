@@ -23,5 +23,13 @@ pipeline {
                 sh 'sudo docker push ghcr.io/$DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest'
             }
         }
+        stage ('Deploy Ec2') {
+            steps {
+                sshagent(['ec2Login']) {
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-220-174-254.us-east-2.compute.amazonaws.com ; docker pull ghcr.io/$DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest"
+                    sh "docker run -d -p 3000:3000 --name=react ghcr.io/$DOCKERHUB_CREDENTIALS_USR/react-jenkins:latest"
+                }
+            }
+        }
     }
 }
